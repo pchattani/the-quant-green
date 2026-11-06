@@ -2714,13 +2714,11 @@ var FOLLOW_KEY = 'qk-follow-v1', FOLLOW_MAX = 30;
 var FOLLOW_K = /^[a-z]+:[a-z0-9_]+:[A-Za-z0-9_.\-]+$/;
 /* the sites and scopes that publish follow cards (docs/<site>/data/follow/<scope>/<id>.json) */
 QK.FOLLOW_CARDS = { bullpen: ['mlb', 'aaa'], site: ['club'], rink: ['team'], gridiron: ['team'], hardwood: ['nba', 'wnba'],
-  campus: ['cfb', 'mbb', 'wbb', 'mch', 'wch'], ace: ['atp', 'wta'], paddock: ['driver', 'team'], scrum: ['men', 'women'],
-  /* The Quant Iron (6 Nov 2026): a lifter card per lifter page */
-  iron: ['lifter'] };
+  campus: ['cfb', 'mbb', 'wbb', 'mch', 'wch'], ace: ['atp', 'wta'], paddock: ['driver', 'team'], scrum: ['men', 'women'] };
 /* what each scope is called, for chips, notes and the picker */
 QK.FOLLOW_SCOPES = { mlb: 'MLB', aaa: 'Triple-A', nba: 'NBA', wnba: 'WNBA', club: 'Football', team: 'Team', cfb: 'College football',
   mbb: 'Men’s college basketball', wbb: 'Women’s college basketball', mch: 'Men’s college hockey', wch: 'Women’s college hockey',
-  atp: 'ATP', wta: 'WTA', driver: 'Driver', men: 'Men’s rugby', women: 'Women’s rugby', lifter: 'Lifter' };
+  atp: 'ATP', wta: 'WTA', driver: 'Driver', men: 'Men’s rugby', women: 'Women’s rugby' };
 var followFns = [], followCache = {};
 function folderSport(folder) { for (var i = 0; i < QK.ALL_SPORTS.length; i++) if (QK.ALL_SPORTS[i].folder === folder) return QK.ALL_SPORTS[i]; return null; }
 function fClean(x) {
@@ -2762,8 +2760,7 @@ var FOLLOW_ROUTES = {
   ace: function (r) { var m = /^\/(atp|wta)\/player\/([A-Za-z0-9]+)/.exec(r); return m ? [m[1], m[2]] : null; },
   paddock: function (r) { var m = /^\/(driver|team)\/([A-Za-z0-9_\-]+)/.exec(r); return m ? [m[1], m[2]] : null; },
   site: function (r) { var m = /^\/club\/(\d+)/.exec(r); return m ? ['club', m[1]] : null; },
-  scrum: function (r) { var m = /^\/(men|women)\/team\/([A-Za-z0-9]+)/.exec(r); return m ? [m[1], m[2]] : null; },
-  iron: function (r) { var m = /^\/player\/([a-f0-9]+)(?:[/?]|$)/.exec(r); return m ? ['lifter', m[1]] : null; }
+  scrum: function (r) { var m = /^\/(men|women)\/team\/([A-Za-z0-9]+)/.exec(r); return m ? [m[1], m[2]] : null; }
 };
 QK.follow = {
   KEY: FOLLOW_KEY, MAX: FOLLOW_MAX,
